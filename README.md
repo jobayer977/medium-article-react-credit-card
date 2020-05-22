@@ -56,6 +56,66 @@ The card component accepts four arguments as props: CVC, expire, name, and numbe
 So far, our MyCards.js file has all of this code:
 
 <iframe src="https://medium.com/media/b84dd4dc503ecab748351a032c6e82ba" frameborder=0></iframe>
+    
+import React, { useState } from "react";
+import Cards from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
+
+const MyCards = () => {
+	const [data, setData] = useState({
+		cvc: "",
+		expiry: "",
+		name: "",
+		number: ""
+	});
+	const handleInputChange = (e) => {
+		setData({
+			...data,
+			[e.target.name]: e.target.value
+		});
+	};
+
+	return (
+		<div id="PaymentForm">
+			<Cards
+				cvc={data.cvc}
+				expiry={data.expiry}
+				focus={data.focus}
+				name={data.name}
+				number={data.number}
+			/>
+			<form action="">
+				<input
+					type="number"
+					name="cvc"
+					placeholder="CVC"
+					onChange={handleInputChange}
+				/>
+				<input
+					type="date"
+					name="expiry"
+					placeholder="Expire Date"
+					onChange={handleInputChange}
+				/>
+				<input
+					type="text"
+					name="name"
+					placeholder="Your Name"
+					onChange={handleInputChange}
+				/>
+				<input
+					type="number"
+					name="number"
+					placeholder="Card Number"
+					onChange={handleInputChange}
+				/>
+			</form>
+		</div>
+	);
+};
+
+export default MyCards;
+view rawMyCards.js hosted with ❤ by GitHub
 
 OK, now our work is done in the App.js file. We import the MyCards.js file and render. So open your App.js file in the src directory, and paste this code. This code just imports our MyCards.js components.
 
